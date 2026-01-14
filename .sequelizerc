@@ -1,0 +1,6 @@
+import { resolve } from "path";
+
+export const config = resolve("src", "sequelize", "config", "config.js");
+export const modelsPath = resolve("src", "sequelize", "models");
+export const migrationsPath = resolve("src", "sequelize", "migrations");
+export const seedersPath = resolve("src", "sequelize", "seeders");
