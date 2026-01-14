@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes";
 
 const app = express();
 
@@ -12,8 +13,6 @@ app.use(
   cors({
     origin: ["http://localhost:3000"], // frontend URL(s)
     credentials: true, // allow cookies
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -31,8 +30,14 @@ app.use(cookieParser());
 /* =======================
    ROUTES
 ======================= */
-app.get("/health", (_, res) => {
-  res.json({ status: "OK" });
-});
+app.get(
+  "/health",
+
+  (_, res, next) => {
+    res.json({ status: "OK" });
+  }
+);
+
+app.use("/auth", authRoutes);
 
 export default app;
