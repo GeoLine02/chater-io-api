@@ -1,4 +1,4 @@
-import { Dialect, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,7 +10,7 @@ export const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
-    dialect: process.env.DB_DIALECT as Dialect,
+    dialect: "postgres",
     logging: false,
   }
 );
