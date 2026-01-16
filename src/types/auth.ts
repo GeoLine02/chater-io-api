@@ -1,8 +1,8 @@
 export interface UserLoginPayload {
-  email: string;
+  username: string;
   password: string;
 }
 
 export interface UserCreatePayload extends UserLoginPayload {
-  username: string;
+  email: string;
 }

@@ -5,7 +5,7 @@ dotenv.config();
 
 export const generateAccessToken = (paylaod: Object) => {
   const accessToken = jwt.sign(paylaod, process.env.ACCESS_TOKEN_SECRET!, {
-    expiresIn: "15m",
+    expiresIn: "10s",
   });
   return accessToken;
 };
