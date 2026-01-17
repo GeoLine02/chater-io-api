@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes";
+import userRotues from "./routes/user.routes";
+
 const app = express();
 
 /* =======================
@@ -12,7 +14,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000"], // frontend URL(s)
     credentials: true, // allow cookies
-  })
+  }),
 );
 
 /* =======================
@@ -34,9 +36,10 @@ app.get(
 
   (_, res, next) => {
     res.json({ status: "OK" });
-  }
+  },
 );
 
 app.use("/auth", authRoutes);
+app.use("/user", userRotues);
 
 export default app;
