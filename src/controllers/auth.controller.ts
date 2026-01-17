@@ -13,7 +13,7 @@ export async function createUserController(req: Request, res: Response) {
     const isProduction = process.env.NODE_ENV === "production";
 
     res.cookie("accessToken", result.accessToken, {
-      maxAge: 10 * 1000,
+      maxAge: 15 * 60 * 1000,
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? "none" : "lax",
@@ -60,7 +60,7 @@ export async function loginUserController(req: Request, res: Response) {
     const isProduction = process.env.NODE_ENV === "production";
 
     res.cookie("accessToken", result.accessToken, {
-      maxAge: 10 * 1000,
+      maxAge: 15 * 60 * 1000,
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? "none" : "lax",
@@ -99,11 +99,10 @@ export async function loginUserController(req: Request, res: Response) {
 
 export const refreshTokenController = async (req: Request, res: Response) => {
   try {
-    console.log("123123123");
     const response = await refreshAccessToken(req);
     const isProduction = process.env.NODE_ENV === "production";
     res.cookie("accessToken", response.accessToken, {
-      maxAge: 10 * 1000,
+      maxAge: 15 * 60 * 1000,
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? "none" : "lax",
