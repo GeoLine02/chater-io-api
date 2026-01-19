@@ -99,9 +99,9 @@ export async function loginUserController(req: Request, res: Response) {
 
 export const refreshTokenController = async (req: Request, res: Response) => {
   try {
-    const response = await refreshAccessToken(req);
+    const { accessToken } = await refreshAccessToken(req);
     const isProduction = process.env.NODE_ENV === "production";
-    res.cookie("accessToken", response.accessToken, {
+    res.cookie("accessToken", accessToken, {
       maxAge: 15 * 60 * 1000,
       httpOnly: true,
       secure: isProduction,
@@ -109,8 +109,9 @@ export const refreshTokenController = async (req: Request, res: Response) => {
       path: "/",
     });
 
-    if (response.accessToken) {
+    if (accessToken) {
       return res.json({
+        accessToken: accessToken,
         message: "access token refreshed",
       });
     }

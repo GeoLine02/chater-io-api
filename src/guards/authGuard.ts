@@ -9,7 +9,6 @@ export interface UserJwtPayload extends jwt.JwtPayload {
 export const authGuard = (req: Request, res: Response, next: NextFunction) => {
   try {
     // Get token from cookies
-    console.log("user auth guard req,cookies", req.cookies);
     const accessToken = req.cookies?.accessToken;
 
     // Verify token

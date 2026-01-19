@@ -4,7 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import userRotues from "./routes/user.routes";
-
+import roomRoutes from "./routes/rooms.routes";
+import { initAssociations } from "./sequelize/models/associate";
 const app = express();
 
 /* =======================
@@ -28,6 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 ======================= */
 app.use(cookieParser());
 
+initAssociations();
+
 /* =======================
    ROUTES
 ======================= */
@@ -41,5 +44,6 @@ app.get(
 
 app.use("/auth", authRoutes);
 app.use("/user", userRotues);
+app.use("/room", roomRoutes);
 
 export default app;
