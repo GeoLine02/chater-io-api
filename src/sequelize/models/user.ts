@@ -1,7 +1,6 @@
-import { Model, DataTypes, Optional } from "sequelize";
-import { sequelize } from "../../db"; // Import sequelize instance
+import { Model, DataTypes, Optional, Sequelize } from "sequelize";
+import { sequelize } from "../../db";
 
-// Define an interface for the attributes
 interface UserAttributes {
   id: number;
   username: string;
@@ -11,10 +10,8 @@ interface UserAttributes {
   updatedAt?: Date;
 }
 
-// Optional attributes for creation
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
-// Extend Sequelize Model
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes
@@ -26,9 +23,16 @@ export class User
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  static associate(models: any) {
+    // One user has one room
+    User.hasOne(models.Rooms, {
+      foreignKey: "room_owner_id",
+      as: "room",
+    });
+  }
 }
 
-// Initialize immediately when the file is imported
 User.init(
   {
     id: {
@@ -56,5 +60,5 @@ User.init(
     modelName: "User",
     tableName: "Users",
     timestamps: true,
-  }
+  },
 );
