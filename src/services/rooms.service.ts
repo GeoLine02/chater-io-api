@@ -38,3 +38,15 @@ export async function getUserRooms(userId: number) {
 
   return { rooms };
 }
+
+export async function getRoomById(roomId: number) {
+  const existingRoom = await Rooms.findOne({
+    where: { id: roomId },
+  });
+
+  if (!existingRoom) {
+    throw new Error("INVALID_ROOM_ID");
+  }
+
+  return { room: existingRoom };
+}

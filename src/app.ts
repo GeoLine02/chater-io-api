@@ -5,6 +5,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import userRotues from "./routes/user.routes";
 import roomRoutes from "./routes/rooms.routes";
+import chatRoutes from "./routes/chats.routes";
 import { initAssociations } from "./sequelize/models/associate";
 const app = express();
 
@@ -45,5 +46,6 @@ app.get(
 app.use("/auth", authRoutes);
 app.use("/user", userRotues);
 app.use("/room", roomRoutes);
+app.use("/chat", chatRoutes);
 
 export default app;

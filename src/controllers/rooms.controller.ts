@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { createRoom, getUserRooms } from "../services/rooms.service";
+import {
+  createRoom,
+  getRoomById,
+  getUserRooms,
+} from "../services/rooms.service";
 
 export async function createRoomController(req: Request, res: Response) {
   try {
@@ -27,6 +31,20 @@ export async function getUserRoomsController(req: Request, res: Response) {
     console.log(error);
     return res.status(500).json({
       message: "Unable to get member rooms",
+    });
+  }
+}
+
+export async function getRoomByIdController(req: Request, res: Response) {
+  try {
+    const roomId = req.params.roomId;
+    const { room } = await getRoomById(Number(roomId));
+
+    return res.status(200).json({ room });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Unable to get room by id",
     });
   }
 }
